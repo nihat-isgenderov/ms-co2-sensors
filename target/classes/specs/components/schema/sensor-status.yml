@@ -1,0 +1,16 @@
+components:
+  schemas:
+    SensorStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [ OK, WARN, ALERT ]
+          description: >
+            The operational status of the sensor, which can be one of the following values:
+
+            - `OK`: The sensor is functioning optimally without any issues.
+
+            - `WARN`: The sensor is operational but may be experiencing minor issues that should be monitored.
+
+            - `ALERT`: The sensor has encountered critical issues requiring immediate attention.

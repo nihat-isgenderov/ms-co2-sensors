@@ -1,0 +1,14 @@
+components:
+  schemas:
+    SensorMeasurement:
+      type: object
+      description: A schema defining the structure of a sensor measurement submission. It includes both the CO2 concentration and the exact time the measurement was recorded.
+      properties:
+        co2:
+          type: integer
+          format: int64
+          description: CO2 concentration measured by the sensor, specified in parts per million (ppm). This measurement is vital for tracking air quality and identifying potential environmental concerns.
+        time:
+          type: string
+          format: date-time
+          description: The timestamp marking when the measurement was taken, according to ISO 8601 format. This precision ensures that each data point can be accurately placed within a temporal context for analysis.

@@ -137,11 +137,10 @@ ms-co2-sensors-be is a Spring Boot application that uses:
 * Java 11
 * Maven
 * postgres database
-* apache kafka
 
 ## Configure the ms-co2-sensors database locally
 ### without docker, using DB-studio like PgAdmin
-Install the Postgres database locally and create a database named `ec_productassignment_be` with username `ec_productassignment_be` and password `ec_productassignment_be`.
+Install the Postgres database locally and create a database named `co2-sensor` with username `co2-sensor_be` and password `co2-sensor_be`.
 
 first you need to create the database and schema.
 ```sql

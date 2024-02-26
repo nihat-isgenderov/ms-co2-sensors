@@ -1,0 +1,167 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet author="niat_isgandarov" id="20240225000_t_co2-sensor-add_t_sensor_sequence">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="seq_t_sensor_sequence" />
+            </not>
+        </preConditions>
+
+        <createSequence sequenceName="seq_t_sensor_sequence"
+                        incrementBy="50"/>
+    </changeSet>
+
+    <changeSet author="niat_isgandarov" id="20240225000_t_co2-sensor-add_t_sensor">
+        <createTable tableName="t_sensor">
+            <column name="id" type="bigint" valueSequenceNext="seq_t_sensor_sequence">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="t_sensor_pkey"/>
+            </column>
+
+            <column name="sensor_uuid" type="uuid" >
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="name" type="nvarchar(40)" >
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="timestamp without time zone" defaultValueComputed="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="nvarchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="timestamp without time zone" />
+            <column name="modified_by" type="nvarchar(64)" />
+        </createTable>
+    </changeSet>
+
+    <changeSet author="niat_isgandarov" id="20240225000_t_co2-sensor-add_t_sensor_status_sequence">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="seq_t_sensor_status_sequence" />
+            </not>
+        </preConditions>
+
+        <createSequence sequenceName="seq_t_sensor_status_sequence"
+                        incrementBy="50"/>
+    </changeSet>
+
+    <changeSet author="niat_isgandarov" id="20240225000_t_co2-sensor-add_t_sensor_status">
+        <createTable tableName="t_sensor_status">
+            <column name="id" type="bigint" valueSequenceNext="seq_t_sensor_status_sequence">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="t_sensor_status_pkey"/>
+            </column>
+
+            <column name="sensor_uuid" type="uuid" >
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="nvarchar(16)" >
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="warn_count" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="started_at" type="timestamp without time zone" defaultValueComputed="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sensor_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="sensor_id" baseTableName="t_sensor_status"
+                                 constraintName="t_sensor_status_t_sensor_id_foreign" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="t_sensor"/>
+    </changeSet>
+
+    <changeSet author="niat_isgandarov" id="20240225000_t_co2-sensor-add_t_alert_sequence">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="seq_t_alert_sequence" />
+            </not>
+        </preConditions>
+
+        <createSequence sequenceName="seq_t_alert_sequence"
+                        incrementBy="50"/>
+    </changeSet>
+
+    <changeSet author="niat_isgandarov" id="20240225000_t_co2-sensor-add_t_alert">
+        <createTable tableName="t_alert">
+            <column name="id" type="bigint" valueSequenceNext="seq_t_alert_sequence">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="t_alert_pkey"/>
+            </column>
+
+            <column name="sensor_uuid" type="uuid" >
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="started_at" type="timestamp without time zone" defaultValueComputed="now()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ended_at" type="timestamp without time zone" defaultValueComputed="now()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="timestamp without time zone" defaultValueComputed="now()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="sensor_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="sensor_id" baseTableName="t_alert"
+                                 constraintName="t_alert_sensor_id_foreign" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="t_sensor"/>
+    </changeSet>
+
+    <changeSet author="niat_isgandarov" id="20240225000_t_co2-sensor-add_t_measurement_sequence">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="seq_t_measurement_sequence" />
+            </not>
+        </preConditions>
+
+        <createSequence sequenceName="seq_t_measurement_sequence"
+                        incrementBy="50"/>
+    </changeSet>
+
+    <changeSet author="niat_isgandarov" id="20240225000_t_co2-sensor-add_t_measurement">
+        <createTable tableName="t_measurement">
+            <column name="id" type="bigint" valueSequenceNext="seq_t_measurement_sequence">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="t_measurement_pkey"/>
+            </column>
+
+            <column name="sensor_uuid" type="uuid" >
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="co2_amount" type="bigint" >
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="timestamp without time zone" defaultValueComputed="now()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="sensor_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="sensor_id" baseTableName="t_measurement"
+                                 constraintName="t_measurement_sensor_id_foreign" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="t_sensor"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,10 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/com/weather/sensor/api/ApiUtil.java
+src/main/java/com/weather/sensor/api/SensorApi.java
+src/main/java/com/weather/sensor/model/AlertResponse.java
+src/main/java/com/weather/sensor/model/CO2Statistics.java
+src/main/java/com/weather/sensor/model/MeasurementResponse.java
+src/main/java/com/weather/sensor/model/SensorMeasurement.java
+src/main/java/com/weather/sensor/model/SensorStatus.java

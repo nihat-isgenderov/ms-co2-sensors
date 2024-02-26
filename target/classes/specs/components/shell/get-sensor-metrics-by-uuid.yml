@@ -1,0 +1,4 @@
+lang: Shell
+source: |
+  curl -X GET 'https://api.weather.com/api/v1/sensors/123e4567-e89b-12d3-a456-426614174000/metrics' \
+       -H 'Accept: application/json'

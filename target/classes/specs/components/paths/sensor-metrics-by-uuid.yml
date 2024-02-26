@@ -1,0 +1,25 @@
+get:
+  summary: Get sensor metrics
+  description: >
+    Retrieves comprehensive metrics for a specific sensor, identified by its unique UUID. This endpoint is designed to provide valuable statistical insights into environmental data captured by the sensor, such as CO2 levels over the past 30 days. It's instrumental for monitoring air quality trends and assessing environmental conditions in real-time.
+  operationId: getSensorMetrics
+  x-codeSamples:
+    - $ref: '../shell/get-sensor-metrics-by-uuid.yml'
+  tags:
+    - Sensor
+  parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the sensor whose metrics are being requested.
+  responses:
+    '200':
+      description: Sensor metrics retrieved successfully. The response includes statistical data such as maximum and average CO2 levels within the specified period, offering a snapshot of the sensor's environmental monitoring capabilities.
+      content:
+        application/json:
+          schema:
+            $ref: '../schema/measurement-response.yml#/components/schemas/CO2Statistics'
+    '404':
+      description: Sensor not found. Indicates that no sensor could be located corresponding to the provided UUID, suggesting either an incorrect UUID or that the sensor is not registered within the system.

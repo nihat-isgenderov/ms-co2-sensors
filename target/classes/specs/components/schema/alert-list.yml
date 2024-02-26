@@ -1,0 +1,7 @@
+components:
+  schemas:
+    AlertList:
+      type: array
+      items:
+        $ref: 'alert.yml#/components/schemas/AlertResponse'
+      description: An array of alert objects, each representing a distinct alert event for a sensor.

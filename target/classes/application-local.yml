@@ -1,0 +1,38 @@
+server:
+  port: 8093
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      schema: co2-sensor_be
+      connectionTimeout: 1900000
+      leakDetectionThreshold: 300000
+      minimumIdle: 2
+      maximumPoolSize: 25
+      idleTimeout: 30000
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/co2-sensor?cachePrepStmts=true&useServerPrepStmts=true&rewriteBatchedStatements=true
+    username: co2-sensor_be
+    password: co2-sensor_be
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        show_sql: true
+        format_sql: true
+  liquibase:
+    url: jdbc:postgresql://localhost:5433/co2-sensor?cachePrepStmts=true&useServerPrepStmts=true&rewriteBatchedStatements=true
+    user: co2-sensor_be
+    password: co2-sensor_be
+logging:
+  level:
+    org:
+      hibernate: ERROR
+      springframework:
+        security: ERROR
+    com:
+      weather: INFO

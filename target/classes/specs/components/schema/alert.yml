@@ -1,0 +1,20 @@
+components:
+  schemas:
+    AlertResponse:
+      type: object
+      description: |
+        Represents a significant event detected by the sensor, characterized by specific conditions that exceed predefined thresholds. The alert encompasses a start and end time, delineating the duration of the event. It also includes a series of measurements taken during this period, each of which contributes to the rationale behind the alert's initiation.
+      properties:
+        startTime:
+          type: string
+          format: date-time
+          description: The ISO 8601 formatted date and time marking the beginning of the alert period.
+        endTime:
+          type: string
+          format: date-time
+          description: The ISO 8601 formatted date and time marking the conclusion of the alert period.
+        measurements:
+          type: array
+          items:
+            $ref: './measurement.yml#/components/schemas/MeasurementResponse'
+          description: A collection of measurements recorded during the alert period, detailing the data points that led to the alert being triggered.
