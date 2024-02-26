@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Changeset to create a materialized view for sensor data over the last 30 days -->
+    <changeSet id="20240227000_mv_materialized_view_metrics" author="niat_isgandarov">
+        <sql>
+            CREATE MATERIALIZED VIEW mv_sensor_data_last_30_days AS
+            SELECT
+                sensor_id,
+                MAX(co2_amount) AS max_last30Days,
+                AVG(co2_amount) AS avg_last30Days
+            FROM
+                t_measurement
+            WHERE
+                created_at >= NOW() - INTERVAL '30 days'
+            GROUP BY
+                sensor_id;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

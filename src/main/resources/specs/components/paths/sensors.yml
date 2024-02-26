@@ -1,0 +1,29 @@
+post:
+  summary: Collect sensor measurements
+  description: >
+    Allows for the submission of environmental sensor data, particularly CO2 concentration measurements. Sensors identified by their UUID can post readings, enabling real-time environmental monitoring and data collection for analysis. This endpoint is critical for aggregating sensor data across various locations, facilitating environmental assessments and responsive actions based on CO2 levels.
+  operationId: collectMeasurements
+  x-codeSamples:
+    - $ref: '../shell/post-sensor.yml'
+  tags:
+    - Sensor
+  parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the sensor from which the measurements originate. This UUID is essential for correctly associating the incoming data with the specific sensor in the system's database.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schema/sensor-measurement.yml#/components/schemas/SensorMeasurement'
+  responses:
+    '200':
+      description: Measurement collected successfully. The data has been recorded and will be used for ongoing monitoring and analysis.
+    '400':
+      description: Invalid input provided. The request body did not match the expected format or contained out-of-range values.
+
+

@@ -1,0 +1,15 @@
+components:
+  schemas:
+    MeasurementResponse:
+      type: object
+      description: |
+        A data point recorded by the sensor, part of the alert's measurements. It includes specific environmental readings, such as CO2 levels, that are critical for assessing conditions leading to the alert. Each measurement is uniquely identified by a UUID, facilitating precise tracking and referencing of individual data points.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The Universally Unique Identifier (UUID) for the measurement, providing a unique reference to each data point.
+        co2:
+          type: integer
+          format: int64
+          description: The concentration of CO2 measured, expressed in parts per million (ppm).

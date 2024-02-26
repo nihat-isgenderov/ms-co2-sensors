@@ -1,0 +1,17 @@
+components:
+  schemas:
+    CO2Statistics:
+      type: object
+      description: |
+        This schema encapsulates the CO2 level statistics measured by environmental sensors, specifically focusing on the last 30 days. It includes both the peak CO2 concentration recorded within this timeframe, which can indicate the highest level of environmental impact or pollution, and the average concentration, offering insights into overall air quality trends during the period.
+      properties:
+        maxLast30Days:
+          type: integer
+          format: int64
+          description: |
+            Represents the highest CO2 concentration (in parts per million, ppm) detected by the sensor over the past 30 days. This metric is crucial for identifying peak pollution events or moments of significant environmental stress.
+        avgLast30Days:
+          type: number
+          format: double
+          description: |
+            Reflects the mean CO2 concentration (in ppm) observed by the sensor throughout the last 30 days. Averaging these values provides a general sense of air quality and helps in assessing long-term environmental conditions and compliance with air quality standards.

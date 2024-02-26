@@ -1,0 +1,8 @@
+lang: Shell
+source: |
+    curl -X POST 'https://api.weather.com/api/v1/sensors/{uuid}/measurements' \
+    -H 'Content-Type: application/json' \
+    -d '{
+    "co2": 415,
+    "time": "2023-09-21T15:03:00Z"
+    }'

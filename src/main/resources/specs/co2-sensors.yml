@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  version: "1.0.0"
+  title: CO2 Monitoring Service API
+  description: 
+    |
+    API for collecting sensor data, updating sensor statuses, and listing alerts based on CO2 levels.
+  termsOfService: https://localhost:8087/terms/
+  contact:
+    email: apiteam@weather.com
+  license:
+    name: Apache 2.0
+    url: https://weather.com/licenses/LICENSE-2.0.html
+servers:
+  - url: http://127.0.0.1:{port}
+    description: Local mock API server.
+    variables:
+      port:
+        default: '4010'
+  - url: http://weather.com:{port}/{basePath}
+    description: The production API server.
+    variables:
+      port:
+        enum:
+          - '80'
+          - '8443'
+          - '443'
+        default: '80'
+      basePath:
+        default: ms-co2-sensors-be
+  - url: http://ref.weather:{port}/{basePath}
+    description: The reference API server.
+    variables:
+      port:
+        enum:
+          - '80'
+          - '8443'
+          - '443'
+        default: '80'
+      basePath:
+        default: ms-co2-sensors-be
+  - url: http://acc.weather.com:{port}/{basePath}
+    description: The acceptance API server.
+    variables:
+      port:
+        enum:
+          - '80'
+          - '8443'
+          - '443'
+        default: '80'
+      basePath:
+        default: ms-co2-sensors-be
+tags:
+  - name: Sensor
+    description: 'Sensor specific data.'
+paths:
+  /api/v1/sensors/{uuid}/measurements:
+    $ref: './components/paths/sensors.yml'
+  /api/v1/sensors/{uuid}:
+    $ref: './components/paths/sensor-status-by-uuid.yml'
+  /api/v1/sensors/{uuid}/metrics:
+    $ref: './components/paths/sensor-metrics-by-uuid.yml'
+  /api/v1/sensors/{uuid}/alerts:
+    $ref: './components/paths/sensor-alerts-by-uuid.yml'
+components:
+  securitySchemes:
+    bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
+
+security:
+- bearerAuth: []

@@ -1,0 +1,27 @@
+get:
+  summary: Get sensor status
+  description: >
+    Retrieves the current operational status of a specified sensor, identified by its unique UUID. This endpoint is pivotal for monitoring sensor health, enabling immediate response to any identified issues. It categorizes sensor status into three distinct levels: OK, WARN, and ALERT, each indicating varying degrees of operational normalcy and urgency.
+  operationId: getSensorStatus
+  x-codeSamples:
+    - $ref: '../shell/get-sensor-status-by-uuid.yml'
+  tags:
+    - Sensor
+  parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier (UUID) of the sensor whose status is being queried.
+  responses:
+    '200':
+      description: >
+        Successfully retrieves the current status of the sensor, indicating its operational condition as one of three predefined states.
+      content:
+        application/json:
+          schema:
+            $ref: '../schema/sensor-status.yml#/components/schemas/SensorStatus'
+    '404':
+      description: >
+        The request failed because the sensor with the specified UUID could not be found. This could be due to an incorrect UUID or the sensor not being registered in the system.
