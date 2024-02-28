@@ -65,17 +65,8 @@ class SensorControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(sensorMeasurement)))
                 .andExpect(status().isOk());
-        StringUtils.isBlank()
     }
 
-    public static List<Transaction> convertToTransactions(List<String> transactions) {
-        List<Transaction> result = new ArrayList<>();
-        transactions.forEach(transaction -> {
-            String[] parts = transaction.split(",");
-            result.add(new Transaction(parts[0], parts[1], parts[2], Integer.valvalueOf(parts[3]), Integer.valueOf(parts[4])));
-        });
-        return result;
-    }
     @Test
     void getSensorStatus_ShouldReturnSensorStatus() throws Exception {
         given(sensorService.getSensorStatusByUuid(sensorUuid)).willReturn(sensorStatus);
