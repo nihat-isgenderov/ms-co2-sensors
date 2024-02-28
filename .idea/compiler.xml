@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ec-productassignment-be" target="11" />
+      <module name="ms-co2-sensors" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
